@@ -52,16 +52,16 @@ $amount = count($output_array[1]);
 
 for ($i = 0; $i <= $amount; $i++)
 {
+  	$record = array('id'      => $output_array[1][$i],
+			'fullname' => $output_array[2][$i],
+			'fathername' => $output_array[3][$i], 
+			'codemelli' => $output_array[4][$i], 
+			'deathdate' => $output_array[5][$i], 
+			'blockno' => $output_array[6][$i], 
+			'partno' => $output_array[7][$i], 
+			'rowno' =>  $output_array[8][$i], 
+			'graveno' =>  $output_array[9][$i], 
+			'nextto' =>  $output_array[10][$i]);
   
-  
-	scraperwiki::save_sqlite(array('data'), 
-	                    array(
-	                          'id'      => $output_array[1][$i],
-	                          'fullname' => $output_array[2][$i],
-	                          'fathername' => $output_array[3][$i], 
-	                          'codemelli' => $output_array[4][$i], 
-	                          'deathdate' => $output_array[5][$i], 
-	                          'partno' => $output_array[6][$i], 
-	                          'rowno' =>  $output_array[7][$i], 
-	                          'nextto' =>  $output_array[8][$i]));
+	scraperwiki::save_sqlite(array('data'), $entry);
 }
