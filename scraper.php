@@ -31,7 +31,7 @@ function scrapePOST($url) {
   curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
   curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
   curl_setopt($curl, CURLOPT_MAXREDIRS, 10);
-  curl_setopt($ch, CURLOPT_POST, 1);
+  curl_setopt($curl, CURLOPT_POST, 1);
   // disable SSL checking to match behaviour in Python/Ruby.
   // ideally would be fixed by configuring curl to use a proper
   // reverse SSL proxy, and making our http proxy support that.
