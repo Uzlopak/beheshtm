@@ -62,7 +62,7 @@ $opts = array(
   )
 );
 $context  = stream_context_create($opts);
-$content = file_get_contents($url, false, $context, -1, 40000);
+$content = file_get_contents($url, false, $context, -1);
 
 
 preg_match_all("/<td class=\"alt2\" align=\"right\">(\d*)<\/td>.*<td class=\"alt1\" align=\"right\">(.*)<\/td>.*<td class=\"alt2\" align=\"right\">(.*)<\/td>.*<td class=\"alt1\" align=\"right\">(.*)<\/td>.*<td class=\"alt2\" align=\"right\">(.*)<\/td>.*<td class=\"alt2\" align=\"right\">(\d*)<\/td>.*<td class=\"alt1\" align=\"right\">(\d*)<\/td>.*<td class=\"alt2\" align=\"right\">(\d*)<\/td>.*<td class=\"alt1\" align=\"right\">(\d*)<\/td>.*<td class=\"alt2\" align=\"right\">(.*)<\/td>/Usmi", $content, $output_array);
