@@ -63,6 +63,5 @@ for ($i = 0; $i <= $amount; $i++)
 	                          'deathdate' => $output_array[5][$i], 
 	                          'partno' => $output_array[6][$i], 
 	                          'rowno' =>  $output_array[7][$i], 
-	                          'nextto' =>  $output_array[8][$i], 
-));
+	                          'nextto' =>  $output_array[8][$i]));
 }
