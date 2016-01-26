@@ -24,4 +24,44 @@
 // All that matters is that your final data is written to an SQLite database
 // called "data.sqlite" in the current working directory which has at least a table
 // called "data".
-?>
+
+require 'scraperwiki.php';
+function scrapePOST($url) {
+  $curl = curl_init($url);
+  curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+  curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+  curl_setopt($curl, CURLOPT_MAXREDIRS, 10);
+  curl_setopt($ch, CURLOPT_POST, 1);
+  // disable SSL checking to match behaviour in Python/Ruby.
+  // ideally would be fixed by configuring curl to use a proper
+  // reverse SSL proxy, and making our http proxy support that.
+  curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+  $res = curl_exec($curl);
+  curl_close($curl);
+  return $res;
+}
+
+$url = "http://motavafian.beheshtm.ir/peaplesearch.php";
+
+$content = scrapePost($url);
+
+preg_match_all("/<td class=\"alt2\" align=\"right\">(\d*)<\/td>.*<td class=\"alt1\" align=\"right\">(.*)<\/td>.*<td class=\"alt2\" align=\"right\">(.*)<\/td>.*<td class=\"alt1\" align=\"right\">(.*)<\/td>.*<td class=\"alt2\" align=\"right\">(.*)<\/td>.*<td class=\"alt2\" align=\"right\">(\d*)<\/td>.*<td class=\"alt1\" align=\"right\">(\d*)<\/td>.*<td class=\"alt2\" align=\"right\">(\d*)<\/td>.*<td class=\"alt1\" align=\"right\">(\d*)<\/td>.*<td class=\"alt2\" align=\"right\">(.*)<\/td>/Usmi", $content, $output_array);
+
+$amount = count($output_array[1]);
+
+for ($i = 0; $i <= $amount; $i++)
+{
+  
+  
+	scraperwiki::save_sqlite(array('data'), 
+	                    array(
+	                          'id'      => $output_array[1][$i],
+	                          'fullname' => $output_array[2][$i],
+	                          'fathername' => $output_array[3][$i], 
+	                          'codemelli' => $output_array[4][$i], 
+	                          'deathdate' => $output_array[5][$i], 
+	                          'partno' => $output_array[6][$i], 
+	                          'rowno' =>  $output_array[7][$i], 
+	                          'nextto' =>  $output_array[8][$i], 
+));
+}
