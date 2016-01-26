@@ -83,5 +83,5 @@ for ($i = 0; $i <= $amount; $i++)
 			'graveno' =>  $output_array[9][$i], 
 			'nextto' =>  $output_array[10][$i]);
   
-	scraperwiki::save_sqlite(array('data'), $entry);
+	scraperwiki::save_sqlite(array('data'), $record);
 }
